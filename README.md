@@ -2,6 +2,6 @@
 
 User Story:
 
-As A __
-I Want __
-So I ___
+As A person looking to eat healthy
+I Want to know what is in the food I eat
+So I can live a healthier life
