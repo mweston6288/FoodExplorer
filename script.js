@@ -4,7 +4,7 @@ var APIKeyUSDA = "L3tHPcFfPTSKSiXbCfKg2KltRijm4Dlj6PL2hK7I"
 
 
 // backend test code
-var input = "butter"
+var input = "Whopper"
 
 $.ajax({
     url: "https://api.nal.usda.gov/fdc/v1/search?api_key="+APIKeyUSDA+"\&generalSearchInput="+input,
@@ -13,3 +13,9 @@ $.ajax({
 }).then(function (response) {
 	console.log(response);
 });
+$.ajax({
+    url: "https://api.nal.usda.gov/fdc/v1/"+ "444977"+"?api_key="+APIKeyUSDA,
+    method:"GET"
+}).then(function(response){
+    console.log(response)
+})
