@@ -38,7 +38,15 @@ function makeCalls(){
 
     }).then(function (response) {
         console.log(response);
-    
+
+        // USDA call with item's ID
+        $.ajax({
+            url: "https://api.nal.usda.gov/fdc/v1/"+ response.foods[0].fdcId+"?api_key="+APIKeyUSDA,
+            method:"GET"
+        }).then(function(response){
+            console.log(response)
+    })})
+        
        // for(var i = 0; i < response.foods.length && i < 10; i++){
             // USDA call with item's ID
             $.ajax({
@@ -66,6 +74,7 @@ function makeCalls(){
             }).then(function(result){
                 console.log(result)
     })})//})
+
 }
 
 $("#searchBar").on("click", function(){

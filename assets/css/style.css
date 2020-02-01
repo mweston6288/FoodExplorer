@@ -1,0 +1,15 @@
+.column {
+    border: 2px solid lightgray;
+    min-width: 50%;
+    min-height: 200px;
+}
+
+.row {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#divInputs, #divTitle, #divFooter {
+    border: 2px solid lightgray;
+    min-height: 80px;
+}
