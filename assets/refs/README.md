@@ -1,4 +1,4 @@
-# Project1 - DietOwl
+# Project1 - Nutrition Pal
 
 
 **USER STORY**
