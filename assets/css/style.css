@@ -1,15 +1,20 @@
-.column {
-    border: 2px solid lightgray;
-    min-width: 50%;
-    min-height: 200px;
+#usdaGeneral, #usdaSpecific, #foodProfile, #foodRecipes {
 }
 
-.row {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+.api-results {
+    overflow-y: auto;
+    white-space: nowrap;
+    max-height: 25vh;
 }
 
-#divInputs, #divTitle, #divFooter {
-    border: 2px solid lightgray;
-    min-height: 80px;
+header {
+    padding: 5vh;
+    background-color: whitesmoke;
+    color: darkslategrey;
+}
+
+footer {
+    padding: 10px;
+    background-color: darkgray;
+    color: white
 }

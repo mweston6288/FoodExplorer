@@ -23,57 +23,179 @@
 </head>
 
 <body>
-
-  <header>
+  <header class="ui container">
 
     <!--Title Area-->
-    <div id="divTitle">
-
-    </div>
+    <h1 class="ui header centered">Project Title</h1>
 
     <!--Input Area-->
-    <div id="divInputs">
+    <div id="divInputs" class="ui two column grid stackable centered">
 
-      <!--Search bar-->
-      <div class="ui icon input">
-        <input type="text" placeholder="Search..." id = "inputField">
-        <i class="inverted circular search link icon" id = "searchBar"></i>
+      <!--Search Column 1-->
+      <div class="column five wide center aligned">
+        <h5 class="ui header">Search Column</h5>
+        <div class="ui icon input">
+          <input id="inputField" type="text" placeholder="Search...">
+          <i id="inputSubmit" class="search icon"></i>
+          <!--<i class="inverted circular search link icon" id = "searchBar"></i>-->
+        </div>
+      </div>
+
+      <!--Search Column 2-->
+      <div class="column five wide center aligned">
+        <h5 class="ui header">Search Column</h5>        
       </div>
 
     </div>
 
   </header>
 
-  <main class="ui two column grid">
-    <div class="row">
+  <main class="ui container">
+    <div class="ui two column grid celled stackable centered">
+      <div class="ui row">
 
-      <!--General USDA Search Results-->
-      <section id="usdaGeneral" class="column">
+        <!--General USDA Search Results-->
+        <section id="usdaGeneral" class="eight wide column">
+          <h5 class="ui header sticky">General USDA Search Results</h5>
+          <div class="api-results">
+            <ul>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+            </ul>
+          </div>
+        </section>
 
-      </section>
+        <!--Specific USDA Search Results-->
+        <section id="usdaSpecific" class="eight wide column">
+          <h5 class="ui header sticky">Specific USDA Search Results</h5>
+          <div class="api-results">
+            <ul>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+            </ul>
+          </div>
+        </section>
 
-      <!--Specific USDA Search Results-->
-      <section id="usdaSpecific" class="column">
+      </div>
 
-      </section>
+      <div class="row">
+
+        <!--Basic Profile-->
+        <section id="foodProfile" class="column">
+          <h5 class="ui header">Basic Profile</h5>
+        </section>
+
+        <!--Recipe Suggestions-->
+        <section id="foodRecipes" class="column">
+          <h5 class="ui header">Recipe Suggestions</h5>
+          <div class="api-results">
+            <ul>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+              <li>Option</li>
+            </ul>
+          </div>
+
+        </section>
+
+      <div>
     </div>
-
-    <div class="row">
-
-      <!--Basic Profile-->
-      <section id="foodProfile" class="column">
-
-      </section>
-
-      <!--Recipe Suggestions-->
-      <section id="foodRecipes" class="column">
-
-      </section>
-    <div>
-
   </main>
 
-  <footer id="divFooter">
+  <footer id="divFooter" class="ui container sticky">
+    <h5>Footer</h5>
 
     <!--Attributions-->
 
@@ -81,6 +203,7 @@
   
 
  <script src ="./assets/js/script.js"></script>
+  
 </body>
 
 </html>
