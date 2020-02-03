@@ -4,23 +4,9 @@ var APIKeySpoonacular = "bbf5060f9b6b4edaa0e013dcaafdeb43"
 
 var input
 
+// Print nutrition info of selected food item
 function makeFoodElements(response){
     console.log(response)
-    var profile = $("#sectionProfile")
-    var container = $("<div>")
-    var column1 = $("<div>")
-    var column2 = $("<div>")
-    var segment = $("<div>")
-
-    $(container).attr("class", "ui two column stackable grid")
-    $(column1).attr("class", "column")
-    $(column2).attr("class", "column")
-    $(segment).attr("class", "ui segment")
-
-    $(profile).append(container)
-    $(container).append(column1)
-    $(container).append(column2)
-    $(column2).append(segment)
 
     $.each( response.labelNutrients,function(index, element){
         console.log(index)
@@ -28,6 +14,24 @@ function makeFoodElements(response){
         $(p).text(index+": " + element.value)
         $(segment).append(p)
     })
+}
+
+// Creates ten elements in usdaGeneral
+// End goal: users can click on them to bring up nutrition details of each item
+// TODO: add click function
+function recommendOptions(response){
+    for(var i = 0; i < response.foods.length && i < 10; i++){
+        var pSection = $("<p>")
+        $(pSection).attr("id", i)
+        $(pSection).attr("fdcId", response.foods[i].fdcId)
+        if(typeof response.foods[i].brandOwner !== "undefined")   
+            $(pSection).text(response.foods[i].brandOwner)
+        else
+            $(pSection).text(response.foodSearchCriteria.generalSearchInput)
+        
+        $("#usdaGeneral").append(pSection)
+    }
+
 }
 
 function makeCalls(){
@@ -38,13 +42,19 @@ function makeCalls(){
     }).then(function (response) {
         console.log(response);
 
-        // USDA call with item's ID
-        $.ajax({
-            url: "https://api.nal.usda.gov/fdc/v1/"+ response.foods[0].fdcId+"?api_key="+APIKeyUSDA,
-            method:"GET"
-        }).then(function(response){
-            console.log(response)
-        })
+        recommendOptions(response)
+        // LEAVE THIS HERE FOR NOW. I'M GOING TO USE IT LATER WHEN I ENABLE CLICK ELEMENTS
+
+        /*for(var i = 0; i < response.foods.length && i < 10; i++){
+            // USDA call with item's ID
+            $.ajax({
+                url: "https://api.nal.usda.gov/fdc/v1/"+ response.foods[0].fdcId+"?api_key="+APIKeyUSDA,
+                method:"GET"
+            }).then(function(response){
+                console.log(response)
+                makeFoodElements(response);
+            })
+        }*/
     })
         
     // Spoonacular API call by ingredients. Returns 10 items
