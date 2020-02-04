@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Nutrition Pal</title>
+  <title>Food & Recipe Explorer</title>
 
   <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/semantic-ui/semantic.min.css">
@@ -23,64 +23,78 @@
 </head>
 
 <body>
-
-  <header>
+  <header class="ui container">
 
     <!--Title Area-->
-    <div id="divTitle">
-
-    </div>
+    <h1 class="ui header centered">Food & Recipe Explorer</h1>
 
     <!--Input Area-->
-    <div id="divInputs">
+    <div id="divInputs" class="ui two column grid stackable centered">
 
-      <!--Search bar-->
-      <div class="ui icon input">
-        <input type="text" placeholder="Search..." id = "inputField">
-        <i class="inverted circular search link icon" id = "searchBar"></i>
+      <!--Search Column 1-->
+      <div class="column five wide center aligned">
+        <h5 class="ui header">Search Keyword</h5>
+        <div id="inputDiv" class="ui icon input">
+          <input id="inputField" type="text" placeholder="Search...">
+          <i id="inputSubmit" class="search link icon"></i>
+        </div>
       </div>
-
     </div>
 
   </header>
 
-  <main class="ui two column grid">
-    <div class="row">
+  <main class="ui container">
+    <div class="ui two column grid celled stackable centered">
+      <div class="ui row">
 
-      <!--General USDA Search Results-->
-      <section id="usdaGeneral" class="column">
+        <!--USDA Search Results-->
+        <section class="eight wide column">
+          <h5 class="ui header sticky">USDA Search Results</h5>
+          <div id="foodResults" class="scrolling">
+            <ul id="usdaResultsList">
+            </ul>
+          </div>
+        </section>
 
-      </section>
+        <!--USDA Item Profile-->
+        <section class="eight wide column">
+          <h5 class="ui header sticky">USDA Item Profile</h5>
+          <div id="foodProfile">
+            <h4 id="itemName"></h4>
 
-      <!--Specific USDA Search Results-->
-      <section id="usdaSpecific" class="column">
+            <!-- Nutrition info goes here -->
 
-      </section>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="row">
+
+        <!--Recipe Suggestions-->
+        <section id="foodRecipes" class="sixteen wide column">
+          <h5 class="ui header">Recipe Suggestions</h5>
+          <div class="scrolling">
+            <ul id="recipeList">
+            </ul>
+          </div>
+
+        </section>
+
+      <div>
     </div>
-
-    <div class="row">
-
-      <!--Basic Profile-->
-      <section id="foodProfile" class="column">
-
-      </section>
-
-      <!--Recipe Suggestions-->
-      <section id="foodRecipes" class="column">
-
-      </section>
-    <div>
-
   </main>
 
-  <footer id="divFooter">
+  <footer id="divFooter" class="ui container sticky">
+    <h5>Footer</h5>
 
     <!--Attributions-->
 
   </footer>
   
 
- <script src ="./assets/js/script.js"></script>
+ <script src ="./assets/js/script-bk.js"></script>
+  
 </body>
 
 </html>
