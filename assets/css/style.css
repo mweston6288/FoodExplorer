@@ -13,4 +13,10 @@ footer {
 .scrolling {
     overflow-y: auto;
     white-space: nowrap;
+    max-height: 25vh;
+}
+
+#itemName {
+    font-size: 1.5em;
+    color:  #6fb33c;
 }

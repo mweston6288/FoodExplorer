@@ -6,9 +6,13 @@ var input;
 
 //Listens for a click on the Search submit button
 $('#inputSubmit').on("click",(function(){
+    $('#inputDiv').addClass('loading');
     input = $('#inputField').val();
     console.log("Search String: " + input);
+
+    //Clears any existing search results
     $('#usdaResultsList').empty();
+
     getUSDAGeneral();
 }))
 
@@ -16,10 +20,11 @@ $('#inputSubmit').on("click",(function(){
 function getUSDAGeneral(){
 
     $.ajax({
-        url: "https://api.nal.usda.gov/fdc/v1/search?api_key="+APIKeyUSDA+"\&generalSearchInput="+input,
+        url: "https://api.nal.usda.gov/fdc/v1/search?api_key="+APIKeyUSDA+"\&generalSearchInput="+input+"\&includeDataTypeList=SR%20Legacy,Foundation",
         method: "GET"
     }).then(function(response) {
         console.log(response);
+        $('#inputDiv').removeClass('loading');
         
         //Loop through the resulting array of food items 
         response.foods.forEach(function(item, index){
@@ -36,7 +41,7 @@ function getUSDAGeneral(){
 
         })
 
-        //Listens for a click on any USDA general result
+        //Listens for clicks on USDA general result items
         $('.usda-results').on("click",(function(){
             event.stopPropagation();
             var fdcId = $(this).parent().attr('data-fdcid');
@@ -53,13 +58,7 @@ function getUSDASpecific(lookup){
     }).then(function(response){
         console.log(response);
 
-
+        $('#itemName').text(response.description)
 
     })
 }
-
-
-
-
-
-
