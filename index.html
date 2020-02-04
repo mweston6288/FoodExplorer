@@ -36,7 +36,7 @@
         <h5 class="ui header">Search Column</h5>
         <div class="ui icon input">
           <input id="inputField" type="text" placeholder="Search...">
-          <i id="inputSubmit" class="search icon"></i>
+          <i id="inputSubmit" class="search link icon"></i>
           <!--<i class="inverted circular search link icon" id = "searchBar"></i>-->
         </div>
       </div>
@@ -54,87 +54,19 @@
     <div class="ui two column grid celled stackable centered">
       <div class="ui row">
 
-        <!--General USDA Search Results-->
-        <section id="usdaGeneral" class="eight wide column">
-          <h5 class="ui header sticky">General USDA Search Results</h5>
-          <div class="api-results">
-            <ul>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
+        <!--USDA Search Results-->
+        <section class="eight wide column">
+          <h5 class="ui header sticky">USDA Search Results</h5>
+          <div id="foodResults" class="scrolling">
+            <ul id="usdaResultsList">
             </ul>
           </div>
         </section>
 
-        <!--Specific USDA Search Results-->
-        <section id="usdaSpecific" class="eight wide column">
-          <h5 class="ui header sticky">Specific USDA Search Results</h5>
-          <div class="api-results">
-            <ul>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-            </ul>
+        <!--USDA Item Profile-->
+        <section class="eight wide column">
+          <h5 class="ui header sticky">USDA Item Profile</h5>
+          <div id="foodProfile" class="">
           </div>
         </section>
 
@@ -142,49 +74,11 @@
 
       <div class="row">
 
-        <!--Basic Profile-->
-        <section id="foodProfile" class="column">
-          <h5 class="ui header">Basic Profile</h5>
-        </section>
-
         <!--Recipe Suggestions-->
-        <section id="foodRecipes" class="column">
+        <section id="foodRecipes" class="sixteen wide column">
           <h5 class="ui header">Recipe Suggestions</h5>
-          <div class="api-results">
-            <ul>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
-              <li>Option</li>
+          <div class="scrolling">
+            <ul id="recipeList">
             </ul>
           </div>
 
@@ -202,7 +96,7 @@
   </footer>
   
 
- <script src ="./assets/js/script.js"></script>
+ <script src ="./assets/js/script-bk.js"></script>
   
 </body>
 

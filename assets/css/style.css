@@ -1,7 +1,7 @@
 #usdaGeneral, #usdaSpecific, #foodProfile, #foodRecipes {
 }
 
-.api-results {
+.scrolling {
     overflow-y: auto;
     white-space: nowrap;
     max-height: 25vh;
@@ -17,4 +17,8 @@ footer {
     padding: 10px;
     background-color: darkgray;
     color: white
+}
+
+.usda-result-gen {
+    
 }
