@@ -3,7 +3,7 @@
 // TODO: add click function
 function recommendOptions(response){
     for(var i = 0; i < response.foods.length && i < 10; i++){
-        var pSection = $("<p>")
+        var pSection = $("<li>")
         $(pSection).attr("id", i)
         $(pSection).attr("fdcId", response.foods[i].fdcId)
         if(typeof response.foods[i].brandOwner !== "undefined")   
@@ -11,7 +11,7 @@ function recommendOptions(response){
         else
             $(pSection).text(response.foodSearchCriteria.generalSearchInput)
         
-        $("#usdaGeneral").append(pSection)
+        $("#usdaResultsList").append(pSection)
     }
 
 }

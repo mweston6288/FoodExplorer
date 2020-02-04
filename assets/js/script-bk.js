@@ -14,6 +14,7 @@ $('#inputSubmit').on("click",(function(){
     $('#usdaResultsList').empty();
 
     getUSDAGeneral();
+ //   getRecipe();
 }))
 
 
@@ -47,6 +48,8 @@ function getUSDAGeneral(){
             var fdcId = $(this).parent().attr('data-fdcid');
             console.log("FDC ID of selected item: " + fdcId);
             getUSDASpecific(fdcId);
+            getRecipe();
+
         }))
     })
 }
@@ -61,4 +64,40 @@ function getUSDASpecific(lookup){
         $('#itemName').text(response.description)
 
     })
+}
+function getRecipe(){
+// Spoonacular API call by ingredients. Returns 10 items
+$.ajax({
+    url: "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+input+"&apiKey="+APIKeySpoonacular,
+    method: "GET"
+}).then(function(result){
+    console.log(result)
+    
+    //$(result).each(function(index, element){
+        // Spoonacular recipe call by ID. Currently hard-coded to only get item 0
+        $.ajax({
+            url: "https://api.spoonacular.com/recipes/"+result[0].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            method: "GET"
+        }).then(function(result){
+            console.log(result)
+            createRecipeElement(result);
+        })
+    })
+}
+function createRecipeElement(result){
+    $("#recipeList").empty();
+    var listItem = $("<li>");
+    var container = $("<div>");
+    var image = $("<img>");
+    var text = $("<a>");
+
+    $(text).text(result.title);
+    $(text).attr("href", result.sourceUrl);
+    $(image).attr("src", result.image);
+
+    $(container).attr("class", "ui segment");
+    $(container).append(text);
+    $(container).append(image);
+    $(listItem).append(container);
+    $("#recipeList").append(listItem);
 }
