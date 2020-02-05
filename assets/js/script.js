@@ -8,13 +8,14 @@ var input;
 $('#inputSubmit').on("click",(function(){
     $('#inputDiv').addClass('loading');
     input = $('#inputField').val();
-    console.log("Search String: " + input);
+   // console.log("Search String: " + input);
 
     //Clears any existing search results
     $('#usdaResultsList').empty();
+    $("#recipeList").empty();
 
     getUSDAGeneral();
- //   getRecipe();
+    getRecipe();
 }))
 
 
@@ -24,7 +25,7 @@ function getUSDAGeneral(){
         url: "https://api.nal.usda.gov/fdc/v1/search?api_key="+APIKeyUSDA+"\&generalSearchInput="+input+"\&includeDataTypeList=SR%20Legacy,Foundation",
         method: "GET"
     }).then(function(response) {
-        console.log(response);
+       // console.log(response);
         $('#inputDiv').removeClass('loading');
         
         //Loop through the resulting array of food items 
@@ -46,10 +47,8 @@ function getUSDAGeneral(){
         $('.usda-results').on("click",(function(){
             event.stopPropagation();
             var fdcId = $(this).parent().attr('data-fdcid');
-            console.log("FDC ID of selected item: " + fdcId);
+         //   console.log("FDC ID of selected item: " + fdcId);
             getUSDASpecific(fdcId);
-            getRecipe();
-
         }))
     })
 }
@@ -65,7 +64,6 @@ function getUSDASpecific(lookup){
 
     })
 }
-
 function getRecipe(){
 // Spoonacular API call by ingredients. Returns 10 items
 $.ajax({
@@ -85,6 +83,88 @@ $.ajax({
         })
     })
 }
+function createRecipeElement(result){
+    // list element
+    var listItem = $("<li>");
+
+    // recipe container
+    var container = $("<div>");
+    $(container).attr("class", "ui segment");
+    $(listItem).append(container);
+
+    // recipe title
+    var text = $("<h5>");
+    $(text).attr("class", "ui center aligned header");
+    var link = $("<a>");
+    $(link).text(result.title);
+    $(link).attr("href", result.sourceUrl);
+    $(link).attr("target", "_blank");
+    $(text).append(link);
+    $(container).append(text);
+
+
+    // grid element
+    var grid = $("<div>");
+    $(grid).attr("class", "ui three column doubling grid container");
+    $(container).append(grid);
+
+    // first column
+    var column1 = $("<div>");
+    $(column1).attr("class", "column");
+    $(grid).append(column1)
+
+    // recipe image
+    var image = $("<img>");
+    $(image).attr("src", result.image);
+
+    if (typeof $(image).attr("src")==="undefined")
+        $(image).attr("src", "assets/img/968871-312x231.jpg");
+    $(image).attr("class", "ui small image");
+    $(column1).append(image);
+
+    // second column
+    var column2 = $("<div>");
+    $(column2).attr("class", "column");
+    $(grid).append(column2)
+
+    // second column content
+    var servingSize = $("<p>");
+    var prepTime = $("<p>");
+    var cookTime = $("<p>");
+    $(servingSize).text("Servings: "+ result.servings);
+    $(prepTime).text("Prep Time: " + result.preparationMinutes+ " minutes");
+    $(cookTime).text("Cooking Time: "+ result.cookingMinutes+" minutes");
+    $(column2).append(servingSize)
+    $(column2).append(prepTime)
+    $(column2).append(cookTime)
+    
+
+    // third column
+    var column3 = $("<div>");
+    $(column3).attr("class", "column");
+    $(grid).append(column3)
+
+    // third column elements
+    if (result.vegetarian){
+        var vegetarian = $("<p>");
+        $(vegetarian).text("Vegetarian")
+        $(column3).append(vegetarian)
+    }
+    if (result.vegan){
+        var vegan = $("<p>");
+        $(vegan).text("Vegan")
+        $(column3).append(vegan)
+    }
+    if (result.glutenFree){
+        var glutenFree = $("<p>");
+        $(glutenFree).text("Gluten Free")
+        $(column3).append(glutenFree)
+    }
+    if (result.dairyFree){
+        var dairyFree = $("<p>");
+        $(dairyFree).text("Dairy Free")
+        $(column3).append(dairyFree)
+    }
 
 function createRecipeElement(result){
     $("#recipeList").empty();
