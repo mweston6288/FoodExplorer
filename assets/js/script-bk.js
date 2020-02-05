@@ -48,8 +48,6 @@ function getUSDAGeneral(){
             var fdcId = $(this).parent().attr('data-fdcid');
             console.log("FDC ID of selected item: " + fdcId);
             getUSDASpecific(fdcId);
-            getRecipe();
-
         }))
     })
 }
