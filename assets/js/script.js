@@ -58,7 +58,7 @@ function getUSDASpecific(lookup){
         url: "https://api.nal.usda.gov/fdc/v1/"+ lookup +"?api_key="+APIKeyUSDA,
         method:"GET"
     }).then(function(response){
-       // console.log(response);
+        console.log(response);
 
         $('#itemName').text(response.description)
 
@@ -70,26 +70,12 @@ $.ajax({
     url: "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+input+"&apiKey="+APIKeySpoonacular,
     method: "GET"
 }).then(function(result){
-   // console.log(result)
+    console.log(result)
     
     //$(result).each(function(index, element){
         // Spoonacular recipe call by ID. Currently hard-coded to only get item 0
         $.ajax({
             url: "https://api.spoonacular.com/recipes/"+result[0].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
-            method: "GET"
-        }).then(function(result){
-            console.log(result)
-            createRecipeElement(result);
-        })
-        $.ajax({
-            url: "https://api.spoonacular.com/recipes/"+result[1].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
-            method: "GET"
-        }).then(function(result){
-            console.log(result)
-            createRecipeElement(result);
-        })
-        $.ajax({
-            url: "https://api.spoonacular.com/recipes/"+result[2].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
             method: "GET"
         }).then(function(result){
             console.log(result)
@@ -180,5 +166,20 @@ function createRecipeElement(result){
         $(column3).append(dairyFree)
     }
 
+function createRecipeElement(result){
+    $("#recipeList").empty();
+    var listItem = $("<li>");
+    var container = $("<div>");
+    var image = $("<img>");
+    var text = $("<a>");
+
+    $(text).text(result.title);
+    $(text).attr("href", result.sourceUrl);
+    $(image).attr("src", result.image);
+
+    $(container).attr("class", "ui segment");
+    $(container).append(text);
+    $(container).append(image);
+    $(listItem).append(container);
     $("#recipeList").append(listItem);
 }
