@@ -40,6 +40,7 @@ $('#inputSubmit').on("click",(function(){
 
     //Clears any existing search results
     $('#usdaResultsList').empty();
+    $('#nutrientList').empty();
     $('#recipeList').empty();
 
 
