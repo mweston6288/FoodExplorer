@@ -39,6 +39,8 @@ $("#searchForm").on("submit",(function(event){
 
     //Clears any existing search results
     $('#usdaResultsList').empty();
+    $('#nutrientList').empty();
+    $('#itemName').empty();
     $('#recipeList').empty();
 
 
@@ -54,6 +56,7 @@ $('#inputSubmit').on("click",(function(){
     //Clears any existing search results
     $('#usdaResultsList').empty();
     $('#nutrientList').empty();
+    $('#itemName').empty();
     $('#recipeList').empty();
 
 
