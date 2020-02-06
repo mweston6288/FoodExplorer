@@ -40,9 +40,11 @@ $('#inputSubmit').on("click",(function(){
 
     //Clears any existing search results
     $('#usdaResultsList').empty();
+    $('#recipeList').empty();
+
 
     getUSDAGeneral();
- //   getRecipe();
+    getRecipe();
 }))
 
 
@@ -75,11 +77,17 @@ function getUSDAGeneral(){
             event.stopPropagation();
             var fdcId = $(this).parent().attr('data-fdcid');
             console.log("FDC ID of selected item: " + fdcId);
-            getUSDASpecific(fdcId);
-            //getRecipe();
+            
+            //Clear any existing content from prior searches and toggle table header
+            $('#nutrientList').empty();
+            $('#tablehead').css('display','table-header-group');
+            $('#measureref').css('display','inline');
+            $('#foodResults').css('padding-top','30px');
 
-        }))
-    })
+            getUSDASpecific(fdcId);
+
+        }));
+    });
 }
 
 function getUSDASpecific(lookup){
@@ -96,49 +104,115 @@ function getUSDASpecific(lookup){
 
             var refID = item.nutrient.id;
 
-            if (nutrientMap.hasOwnProperty(refID)){
-                var nutrient = $('<li/>').html('<span class="nutrient-key">' +  class="usda-results" href="#">' + item.description +  brand + '</a>');
-                $('#usdaResultsList').append(listItem);
-    
+            if ((nutrientMap.hasOwnProperty(refID)) && (item.amount !== undefined)){
+                var nutrient = $('<tr/>').html('<td class="nutrient-key">' + nutrientMap[refID] + '</td><td class="nutrient-value">' + item.amount + " " + item.nutrient.unitName + '</td>');  
+                $('#nutrientList').append(nutrient);
             }
         });
     })
 }
 
-// function getRecipe(){
-// // Spoonacular API call by ingredients. Returns 10 items
-// $.ajax({
-//     url: "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+input+"&apiKey="+APIKeySpoonacular,
-//     method: "GET"
-// }).then(function(result){
-//     console.log(result)
+function getRecipe(){
+    // Spoonacular API call by ingredients. Returns 10 items
+    console.log("Recipe Search: " + input);
+    $.ajax({
+        url: "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+input+"&apiKey="+APIKeySpoonacular,
+        method: "GET"
+    }).then(function(result){
+        console.log(result)
     
-//     //$(result).each(function(index, element){
-//         // Spoonacular recipe call by ID. Currently hard-coded to only get item 0
-//         $.ajax({
-//             url: "https://api.spoonacular.com/recipes/"+result[0].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
-//             method: "GET"
-//         }).then(function(result){
-//             console.log(result)
-//             createRecipeElement(result);
-//         })
-//     })
-// }
+        //$(result).each(function(index, element){
+        // Spoonacular recipe call by ID. Currently hard-coded to only get item 0
+        $.ajax({
+            url: "https://api.spoonacular.com/recipes/"+result[0].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            method: "GET"
+        }).then(function(result){
+            console.log(result)
+            createRecipeElement(result);
+        })
+    })
+}
 
-// function createRecipeElement(result){
-//     $("#recipeList").empty();
-//     var listItem = $("<li>");
-//     var container = $("<div>");
-//     var image = $("<img>");
-//     var text = $("<a>");
+function createRecipeElement(result){
+    // list element
+    var listItem = $("<li>");
 
-//     $(text).text(result.title);
-//     $(text).attr("href", result.sourceUrl);
-//     $(image).attr("src", result.image);
+    // recipe container
+    var container = $("<div>");
+    $(container).attr("class", "ui segment");
+    $(listItem).append(container);
 
-//     $(container).attr("class", "ui segment");
-//     $(container).append(text);
-//     $(container).append(image);
-//     $(listItem).append(container);
-//     $("#recipeList").append(listItem);
-// }
+    // recipe title
+    var text = $("<h5>");
+    $(text).attr("class", "ui center aligned header");
+    var link = $("<a>");
+    $(link).text(result.title);
+    $(link).attr("href", result.sourceUrl);
+    $(link).attr("target", "_blank");
+    $(text).append(link);
+    $(container).append(text);
+
+    // grid element
+    var grid = $("<div>");
+    $(grid).attr("class", "ui three column doubling grid container");
+    $(container).append(grid);
+
+    // first column
+    var column1 = $("<div>");
+    $(column1).attr("class", "column");
+    $(grid).append(column1)
+
+    // recipe image
+    var image = $("<img>");
+    $(image).attr("src", result.image);
+
+    if (typeof $(image).attr("src")==="undefined")
+        { $(image).attr("src", "assets/img/968871-312x231.jpg"); }
+    else 
+        { $(image).attr("class", "ui small image"); }
+    $(column1).append(image);
+
+    // second column
+    var column2 = $("<div>");
+    $(column2).attr("class", "column");
+    $(grid).append(column2)
+
+    // second column content
+    var servingSize = $("<p>");
+    var prepTime = $("<p>");
+    var cookTime = $("<p>");
+    $(servingSize).text("Servings: "+ result.servings);
+    $(prepTime).text("Prep Time: " + result.preparationMinutes+ " minutes");
+    $(cookTime).text("Cooking Time: "+ result.cookingMinutes+" minutes");
+    $(column2).append(servingSize)
+    $(column2).append(prepTime)
+    $(column2).append(cookTime)
+    
+    // third column
+    var column3 = $("<div>");
+    $(column3).attr("class", "column");
+    $(grid).append(column3)
+
+    // third column elements
+    if (result.vegetarian){
+        var vegetarian = $("<p>");
+        $(vegetarian).text("Vegetarian")
+        $(column3).append(vegetarian)
+    }
+    if (result.vegan){
+        var vegan = $("<p>");
+        $(vegan).text("Vegan")
+        $(column3).append(vegan)
+    }
+    if (result.glutenFree){
+        var glutenFree = $("<p>");
+        $(glutenFree).text("Gluten Free")
+        $(column3).append(glutenFree)
+    }
+    if (result.dairyFree){
+        var dairyFree = $("<p>");
+        $(dairyFree).text("Dairy Free")
+        $(column3).append(dairyFree)
+    }
+    $('#recipeList').append(listItem);
+}

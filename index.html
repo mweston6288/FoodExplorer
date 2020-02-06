@@ -39,6 +39,7 @@
           <i id="inputSubmit" class="search link icon"></i>
         </div>
       </div>
+
     </div>
 
   </header>
@@ -61,11 +62,18 @@
           <h4 class="ui header sticky">USDA Item Profile</h4>
           <div id="foodProfile">
             <h4 id="itemName"></h4>
-
+            <p id="measureref">Values are based on a 100g portion.</p>
             <div id="nutrientInfo" class="scrolling">
-              <ul id="nutrientList">
-                
-              </ul>
+              <table>
+                <thead id="tablehead">
+                  <tr>
+                    <th class="nutrient-head">Nutrient</th>
+                    <th class="nutrient-head">Measurement</th>
+                  </tr>
+                </thead>
+                <tbody id="nutrientList">
+                </tbody>
+              </table>
             </div>
 
           </div>
@@ -95,9 +103,8 @@
     <!--Attributions-->
 
   </footer>
-  
 
- <script src ="./assets/js/script.js"></script>
+ <script src ="./assets/js/script-bk.js"></script>
   
 </body>
 

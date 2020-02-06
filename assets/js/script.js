@@ -64,15 +64,16 @@ function getUSDASpecific(lookup){
 
     })
 }
+
 function getRecipe(){
-// Spoonacular API call by ingredients. Returns 10 items
-$.ajax({
-    url: "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+input+"&apiKey="+APIKeySpoonacular,
-    method: "GET"
-}).then(function(result){
-    console.log(result)
+    // Spoonacular API call by ingredients. Returns 10 items
+    $.ajax({
+        url: "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+input+"&apiKey="+APIKeySpoonacular,
+        method: "GET"
+    }).then(function(result){
+        console.log(result)
     
-    //$(result).each(function(index, element){
+        //$(result).each(function(index, element){
         // Spoonacular recipe call by ID. Currently hard-coded to only get item 0
         $.ajax({
             url: "https://api.spoonacular.com/recipes/"+result[0].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
@@ -83,6 +84,7 @@ $.ajax({
         })
     })
 }
+
 function createRecipeElement(result){
     // list element
     var listItem = $("<li>");
@@ -102,7 +104,6 @@ function createRecipeElement(result){
     $(text).append(link);
     $(container).append(text);
 
-
     // grid element
     var grid = $("<div>");
     $(grid).attr("class", "ui three column doubling grid container");
@@ -118,8 +119,9 @@ function createRecipeElement(result){
     $(image).attr("src", result.image);
 
     if (typeof $(image).attr("src")==="undefined")
-        $(image).attr("src", "assets/img/968871-312x231.jpg");
-    $(image).attr("class", "ui small image");
+        { $(image).attr("src", "assets/img/968871-312x231.jpg"); }
+    else 
+        { $(image).attr("class", "ui small image"); }
     $(column1).append(image);
 
     // second column
@@ -138,7 +140,6 @@ function createRecipeElement(result){
     $(column2).append(prepTime)
     $(column2).append(cookTime)
     
-
     // third column
     var column3 = $("<div>");
     $(column3).attr("class", "column");
@@ -165,21 +166,6 @@ function createRecipeElement(result){
         $(dairyFree).text("Dairy Free")
         $(column3).append(dairyFree)
     }
-
-function createRecipeElement(result){
-    $("#recipeList").empty();
-    var listItem = $("<li>");
-    var container = $("<div>");
-    var image = $("<img>");
-    var text = $("<a>");
-
-    $(text).text(result.title);
-    $(text).attr("href", result.sourceUrl);
-    $(image).attr("src", result.image);
-
-    $(container).attr("class", "ui segment");
-    $(container).append(text);
-    $(container).append(image);
-    $(listItem).append(container);
-    $("#recipeList").append(listItem);
+    $('#recipeList').append(listItem);
+    console.log(listItem);
 }
