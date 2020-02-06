@@ -31,7 +31,20 @@ var nutrientMap = {
 
 var input;
 
+$("#searchForm").on("submit",(function(event){
+    event.preventDefault();
+    $('#inputDiv').addClass('loading');
+    input = $('#inputField').val();
+    console.log("Search String: " + input);
 
+    //Clears any existing search results
+    $('#usdaResultsList').empty();
+    $('#recipeList').empty();
+
+
+    getUSDAGeneral();
+    getRecipe();
+})) 
 //Listens for a click on the Search submit button
 $('#inputSubmit').on("click",(function(){
     $('#inputDiv').addClass('loading');
@@ -46,6 +59,7 @@ $('#inputSubmit').on("click",(function(){
     getUSDAGeneral();
     getRecipe();
 }))
+$('')
 
 
 function getUSDAGeneral(){
@@ -114,17 +128,45 @@ function getUSDASpecific(lookup){
 
 function getRecipe(){
     // Spoonacular API call by ingredients. Returns 10 items
-    console.log("Recipe Search: " + input);
     $.ajax({
         url: "https://api.spoonacular.com/recipes/findByIngredients?ingredients="+input+"&apiKey="+APIKeySpoonacular,
         method: "GET"
     }).then(function(result){
         console.log(result)
-    
-        //$(result).each(function(index, element){
+
+        var i = Math.floor(Math.random()*result.length);
+        var j = Math.floor(Math.random()*result.length);
+        var k = Math.floor(Math.random()*result.length);
+        if (i == j){
+            j += 1;
+            j %= result.length;
+        }
+        if (i == k){
+            k += 1;
+            k %= result.length;
+        }
+        if(j == k){
+            k += 1;
+            k %= result.length;
+        }
+       //$(result).each(function(index, element){
         // Spoonacular recipe call by ID. Currently hard-coded to only get item 0
         $.ajax({
-            url: "https://api.spoonacular.com/recipes/"+result[0].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            url: "https://api.spoonacular.com/recipes/"+result[i].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            method: "GET"
+        }).then(function(result){
+            console.log(result)
+            createRecipeElement(result);
+        })
+        $.ajax({
+            url: "https://api.spoonacular.com/recipes/"+result[j].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            method: "GET"
+        }).then(function(result){
+            console.log(result)
+            createRecipeElement(result);
+        })
+        $.ajax({
+            url: "https://api.spoonacular.com/recipes/"+result[k].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
             method: "GET"
         }).then(function(result){
             console.log(result)
@@ -215,4 +257,5 @@ function createRecipeElement(result){
         $(column3).append(dairyFree)
     }
     $('#recipeList').append(listItem);
+    console.log(listItem);
 }

@@ -72,11 +72,40 @@ function getRecipe(){
         method: "GET"
     }).then(function(result){
         console.log(result)
-    
-        //$(result).each(function(index, element){
+
+        var i = Math.floor(Math.random()*result.length);
+        var j = Math.floor(Math.random()*result.length);
+        var k = Math.floor(Math.random()*result.length);
+        if (i == j){
+            j += 1;
+            j %= result.length;
+        }
+        if (i == k){
+            k += 1;
+            k %= result.length;
+        }
+        if(j == k){
+            k += 1;
+            k %= result.length;
+        }
+       //$(result).each(function(index, element){
         // Spoonacular recipe call by ID. Currently hard-coded to only get item 0
         $.ajax({
-            url: "https://api.spoonacular.com/recipes/"+result[0].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            url: "https://api.spoonacular.com/recipes/"+result[i].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            method: "GET"
+        }).then(function(result){
+            console.log(result)
+            createRecipeElement(result);
+        })
+        $.ajax({
+            url: "https://api.spoonacular.com/recipes/"+result[j].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
+            method: "GET"
+        }).then(function(result){
+            console.log(result)
+            createRecipeElement(result);
+        })
+        $.ajax({
+            url: "https://api.spoonacular.com/recipes/"+result[k].id+"/information?includeNutrition=true&apiKey="+APIKeySpoonacular,
             method: "GET"
         }).then(function(result){
             console.log(result)
