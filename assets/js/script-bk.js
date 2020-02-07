@@ -1,6 +1,6 @@
 // API keys that may be useful
 var APIKeyUSDA = "L3tHPcFfPTSKSiXbCfKg2KltRijm4Dlj6PL2hK7I"
-var APIKeySpoonacular = "bbf5060f9b6b4edaa0e013dcaafdeb43"
+var APIKeySpoonacular = "1a70f69a748a4b5e80cb0e156492511e"
 // var nutrientMap = [
 //     {1008:"Calories: "},
 //     {1004:"Total Fat: "},
@@ -31,7 +31,7 @@ var nutrientMap = {
 
 var input;
 
-$("#searchForm").on("submit",(function(event){
+$('#searchForm').on("submit",(function(event){
     event.preventDefault();
     $('#inputDiv').addClass('loading');
     input = $('#inputField').val();
